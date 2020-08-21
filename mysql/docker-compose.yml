@@ -10,6 +10,8 @@ services:
       - --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306"
     volumes:
       - mysql_data:/var/lib/mysql    # 持久化数据
       - mysql_conf:/etc/mysql/conf.d # 配置文件

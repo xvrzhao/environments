@@ -3,6 +3,7 @@ version: '3'
 services:
   redis:
     build: .
+    container_name: redis
     hostname: redis-host
     ports:
       - "6379"

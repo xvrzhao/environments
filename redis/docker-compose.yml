@@ -1,2 +1,15 @@
 version: '3'
 
+services:
+  redis:
+    build: .
+    hostname: redis-host
+    ports:
+      - "6379"
+    volumes:
+      - redis_data:/data      # AOF 数据
+      - redis_conf:/etc/redis # 配置
+
+volumes:
+  redis_data:
+  redis_conf:

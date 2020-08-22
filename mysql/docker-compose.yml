@@ -4,6 +4,7 @@ services:
 
   mysql:
     image: mysql:latest
+    container_name: mysql
     hostname: mysql-host
     command:
       - --character-set-server=utf8mb4
@@ -18,6 +19,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
     hostname: phpmyadmin-host
     environment:
       PMA_HOST: mysql

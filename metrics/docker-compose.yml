@@ -1,0 +1,33 @@
+version: "3"
+
+volumes:
+  prometheus_config:
+  prometheus_data:
+  grafana_config:
+  grafana_data:
+
+services:
+  prometheus:
+    build: .
+    container_name: prometheus
+    hostname: prometheus-host
+    ports:
+      - 9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.enable-lifecycle
+    volumes:
+      - prometheus_config:/etc/prometheus # 配置
+      - prometheus_data:/prometheus # TSDB WAL 等数据
+
+  grafana:
+    image: grafana/grafana:7.1.5
+    container_name: grafana
+    hostname: grafana-host
+    ports:
+      - 3000
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_config:/etc/grafana # 配置
+      - grafana_data:/var/lib/grafana # DB Plugins 等数据

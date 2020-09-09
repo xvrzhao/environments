@@ -1,0 +1,41 @@
+# 参考链接：https://www.jenkins.io/doc/book/installing/#docker
+
+version: "3"
+
+volumes:
+  docker_certs: # 保存 Docker 客户端证书
+  docker_data: # 保存 Docker daemon 产生的镜像等数据
+  jenkins_data: # 保存 Jenkins 数据
+
+services:
+  # DinD 容器作为 Jenkins 容器的 Docker daemon
+  # 容器启动之后，记得创建 /etc/docker/daemon.json 并 添加 registry-mirrors 国内镜像源
+  docker:
+    image: docker:dind
+    container_name: jenkins_docker
+    hostname: jenkins-docker-host
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    volumes:
+      - docker_certs:/certs/client
+      - jenkins_data:/var/jenkins_home
+      - docker_data:/var/lib/docker
+    ports:
+      - 2376:2376
+
+  # admin user: xvrzhao, password: xvrzhao
+  jenkins:
+    image: jenkinsci/blueocean:latest
+    container_name: jenkins
+    hostname: jenkins-host
+    volumes:
+      - docker_certs:/certs/client:ro
+      - jenkins_data:/var/jenkins_home
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
+    ports:
+      - 8080:8080
+      - 50000:50000

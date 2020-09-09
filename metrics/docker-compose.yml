@@ -20,6 +20,7 @@ services:
       - prometheus_config:/etc/prometheus # 配置
       - prometheus_data:/prometheus # TSDB、WAL 等数据
 
+  # user: admin, psw: admin
   grafana:
     image: grafana/grafana:7.1.5
     container_name: grafana

@@ -3,22 +3,34 @@ version: "3"
 volumes:
   prometheus_config:
   prometheus_data:
+  alertmanager_config:
   grafana_config:
   grafana_data:
 
 services:
   prometheus:
-    build: .
+    image: prom/prometheus:v2.20.1
     container_name: prometheus
     hostname: prometheus-host
     ports:
       - 9090:9090
     command:
       - --config.file=/etc/prometheus/prometheus.yml # 指定配置文件
-      - --web.enable-lifecycle # 运行通过 HTTP 接口重新加载配置
+      - --web.enable-lifecycle # 运行通过 HTTP 接口重新加载配置 (POST localhost:9090/-/reload)
     volumes:
       - prometheus_config:/etc/prometheus # 配置
       - prometheus_data:/prometheus # TSDB、WAL 等数据
+    depends_on:
+      - alertmanager
+
+  alertmanager:
+    image: prom/alertmanager:v0.21.0
+    container_name: alertmanager
+    hostname: alertmanager-host
+    ports:
+      - 9093:9093
+    volumes:
+      - alertmanager_config:/etc/alertmanager # 配置
 
   # user: admin, psw: admin
   grafana:

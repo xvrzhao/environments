@@ -22,8 +22,7 @@ services:
     container_name: phpmyadmin
     hostname: phpmyadmin-host
     environment:
-      PMA_HOSTS: mysql,host.docker.internal
-      PMA_PORTS: 3306,3306
+      PMA_HOSTS: mysql:3306,host.docker.internal:3306
     ports:
       - "3380:80"
     depends_on:

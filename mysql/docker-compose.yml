@@ -12,7 +12,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3306"
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql    # 持久化数据
       - mysql_conf:/etc/mysql/conf.d # 配置文件
@@ -22,9 +22,10 @@ services:
     container_name: phpmyadmin
     hostname: phpmyadmin-host
     environment:
-      PMA_HOST: mysql
+      PMA_HOSTS: mysql,host.docker.internal
+      PMA_PORTS: 3306,3306
     ports:
-      - "80"
+      - "3380:80"
     depends_on:
       - mysql
 

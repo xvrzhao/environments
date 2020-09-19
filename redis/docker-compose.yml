@@ -6,9 +6,9 @@ services:
     container_name: redis
     hostname: redis-host
     ports:
-      - "6379"
+      - "6379:6379"
     volumes:
-      - redis_data:/data      # rdb/aof 持久化数据
+      - redis_data:/data # RDB/AOF 持久化数据
       - redis_conf:/etc/redis # 配置
 
 volumes:

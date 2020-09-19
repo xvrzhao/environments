@@ -1,0 +1,31 @@
+version: "3"
+
+volumes:
+  gitlab_conf: # GitLab 配置
+  gitlab_data: # GitLab 数据
+  gitlab_log: # GitLab 日志
+  runner_conf: # Runner 配置
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:rc
+    container_name: gitlab
+    hostname: gitlab-host
+    volumes:
+      - gitlab_conf:/etc/gitlab
+      - gitlab_data:/var/opt/gitlab
+      - gitlab_log:/var/log/gitlab
+    ports:
+      - "10443:443" # HTTPS
+      - "10080:80" # HTTP
+      - "10022:22" # SSH
+
+  runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab_runner
+    hostname: runner-host
+    volumes:
+      - runner_conf:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - gitlab

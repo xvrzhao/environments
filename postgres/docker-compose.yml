@@ -1,0 +1,29 @@
+version: "3"
+
+volumes:
+  data:
+  config:
+  log:
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres-host
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer:latest
+    container_name: postgres_adminer
+    hostname: adminer-host
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres:5432
+    ports:
+      - 5480:8080

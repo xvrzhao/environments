@@ -27,3 +27,13 @@ services:
       ADMINER_DEFAULT_SERVER: postgres:5432
     ports:
       - 5480:8080
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    hostname: pgadmin-host
+    environment:
+      PGADMIN_DEFAULT_EMAIL: xvrzhao@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+        - 80

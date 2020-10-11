@@ -25,6 +25,6 @@ services:
     hostname: pgadmin-host
     environment:
       PGADMIN_DEFAULT_EMAIL: xvrzhao@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: postgres
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
     ports:
       - 5480:80

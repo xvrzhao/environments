@@ -27,4 +27,4 @@ services:
       PGADMIN_DEFAULT_EMAIL: xvrzhao@gmail.com
       PGADMIN_DEFAULT_PASSWORD: postgres
     ports:
-      - 80
+      - 5480:80

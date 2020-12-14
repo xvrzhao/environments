@@ -7,7 +7,7 @@ volumes:
 
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:12
     container_name: postgres
     hostname: postgres-host
     environment:

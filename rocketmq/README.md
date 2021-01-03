@@ -1,3 +1,7 @@
 # RocketMQ
 
-see: https://github.com/apache/rocketmq-docker
+RocketMQ with single broker.
+
+## Reference
+
+- https://github.com/apache/rocketmq-docker

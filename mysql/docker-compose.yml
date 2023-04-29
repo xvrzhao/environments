@@ -3,12 +3,13 @@ version: "3"
 services:
 
   mysql:
-    image: mysql:8.0
+    image: mysql:8
     container_name: mysql
     hostname: mysql-host
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+08:00
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
@@ -18,7 +19,7 @@ services:
       - mysql_conf:/etc/mysql/conf.d # 配置文件
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin:latest
     container_name: phpmyadmin
     hostname: phpmyadmin-host
     environment:

@@ -1,5 +1,5 @@
 ### start up
 
 ```
-$ docker-compose up -d -p mysql
+$ docker compose -p mysql up -d
 ```

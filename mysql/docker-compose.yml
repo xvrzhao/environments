@@ -25,6 +25,7 @@ services:
     environment:
       PMA_ARBITRARY: 1
       PMA_HOSTS: mysql:3306,host.docker.internal:3306
+      UPLOAD_LIMIT: 100000000 # 最大上传文件大小设为 100M，放开 SQL 文件导入等场景的文件大小限制
     ports:
       - "3380:80"
     depends_on:

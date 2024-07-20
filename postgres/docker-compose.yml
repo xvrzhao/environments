@@ -7,20 +7,19 @@ volumes:
 
 services:
   postgres:
-    image: postgres:12
+    image: postgres:16.3
     container_name: postgres
     hostname: postgres-host
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
     volumes:
       - data:/var/lib/postgresql/data
     ports:
       - 5432:5432
 
   pgadmin:
-    image: dpage/pgadmin4:latest
+    image: dpage/pgadmin4:8.9
     container_name: pgadmin
     hostname: pgadmin-host
     environment:
